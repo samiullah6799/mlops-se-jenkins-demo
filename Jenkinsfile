@@ -26,7 +26,7 @@ pipeline {
                 script {
                     def branchName = ${env.BRANCH_NAME}
                     Deploying(branchName)
-                    println("BUILD NUMBER :" ${env.BUILD_NUMBER})
+                    println('BUILD NUMBER : ${env.BUILD_NUMBER}')
                 }
             }
         }
