@@ -24,7 +24,7 @@ pipeline {
         stage('Daeployment') {
             steps {
                 script {
-                    def branchName = ${env.BRANCH_NAME}
+                    def branchName = env.BRANCH_NAME
                     Deploying(branchName)
                     println('BUILD NUMBER : ${env.BUILD_NUMBER}')
                 }
