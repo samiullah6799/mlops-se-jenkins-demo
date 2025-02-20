@@ -21,11 +21,12 @@ pipeline {
             }
         }
 
-        stage('Deployment') {
-
-            script {
-                def branchName = ${env.BRANCH_NAME}
-                Deploying(branchName)
+        stage('Daeployment') {
+            steps {
+                script {
+                    def branchName = ${env.BRANCH_NAME}
+                    Deploying(branchName)
+                }
             }
         }
     }
