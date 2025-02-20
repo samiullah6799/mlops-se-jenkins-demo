@@ -17,7 +17,7 @@ pipeline {
 
         stage('Testing') {
             steps{
-                sh 'pytest test.py'
+                sh 'python3 test.py'
             }
         }
 
@@ -26,6 +26,7 @@ pipeline {
                 script {
                     def branchName = ${env.BRANCH_NAME}
                     Deploying(branchName)
+                    println("BUILD NUMBER :" ${env.BUILD_NUMBER})
                 }
             }
         }
