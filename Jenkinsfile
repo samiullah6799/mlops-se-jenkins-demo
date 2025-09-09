@@ -23,10 +23,22 @@ pipeline {
 
         stage ("Deploy") {
             steps {
-                echo "Deploy to concerned Stage"
+                script {
+                    def branchName = "dev"
+                    println("Groovy Scripting in Jenkins pipeline")
+                    getServerName(branchName)
+                }
             }
         }
 
         
+    }
+}
+
+def void getServerName(String branchName) {
+    if (branchName == 'dev') {
+        println("Deploying to UAT")
+    } else {
+        println("Deploying to production")
     }
 }
