@@ -4,26 +4,38 @@ pipeline {
     stages {  // <-- THIS was missing
         stage("Checkout") {
             steps {
-                echo "Repo Checkout"
+                checkout scmGit(branches: [[name: '*/dev']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/samiullah6799/mlops-se-jenkins-demo.git']])
             }
         }
 
         stage("Build") {
             steps {
-                echo "Installing Dependencies"
+                sh 'pip3 install -r requirements.txt'
             }
         }
 
         stage("Test") {
             steps {
-                echo "Execution of TestCases"
+                sh 'python3 test.py'
             }
         }
 
         stage("Deploy") {
             steps {
-                echo "Update being deployed to concerned stage"
+                script {
+                    def branchName = '${env.BRANCH_NAME}'
+                    println('BRANCH NAME: ${branchName}')
+                    deploy(branchName)
+                }
             }
         }
+    }
+}
+
+def void deploy(String branchName) {
+    if (branchName == "dev") {
+        println("Deploying to UAT")
+    } else {
+        println("Deploying to Production")
     }
 }
