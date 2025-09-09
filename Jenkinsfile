@@ -5,19 +5,19 @@ pipeline {
 
         stage ("Checkout") {
             steps {
-                echo "Checkout Repo"
+                checkout scmGit(branches: [[name: '*/dev']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/samiullah6799/mlops-se-jenkins-demo.git']])
             }
         }
 
         stage ("Build") {
             steps {
-                echo "Installing Dependencies"
+                sh 'pip3 install -r requirements.txt'
             }
         }
 
         stage ("Test") {
             steps {
-                echo "Execution of Automated Testcases"
+                sh 'python3 test.py'
             }
         }
 
